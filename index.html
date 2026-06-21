@@ -36,7 +36,7 @@
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <!-- Babel para JSX -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
 
   <style>
     * {
@@ -111,7 +111,11 @@
     }
 
     function savePurchased(set) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]));
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]));
+      } catch (e) {
+        console.warn("localStorage is not accessible:", e);
+      }
     }
 
     /* ===== SVG ICONS (inline, no dependency needed) ===== */
